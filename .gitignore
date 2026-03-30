@@ -3,3 +3,4 @@
 .env.local
 velog-client/
 velog-server/
+node_modules/
