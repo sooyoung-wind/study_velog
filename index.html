@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Hello — 학습 가이드</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    /* ── 색상 변수 ── */
+    :root {
+      --bg:       #1e1e2e;
+      --bg2:      #181825;
+      --bg3:      #313244;
+      --surface:  #45475a;
+      --text:     #cdd6f4;
+      --subtext:  #a6adc8;
+      --accent:   #89b4fa;
+      --accent2:  #b4befe;
+      --green:    #a6e3a1;
+      --red:      #f38ba8;
+      --yellow:   #f9e2af;
+      --teal:     #94e2d5;
+      --border:   #45475a;
+    }
+
+    /* ── 기본 리셋 ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      display: flex;
+    }
+
+    /* ── 사이드바 ── */
+    nav {
+      width: 260px;
+      min-width: 260px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      padding: 2rem 0 2rem 0;
+    }
+
+    nav .nav-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtext);
+      padding: 0 1.5rem 0.75rem;
+    }
+
+    nav ul { list-style: none; }
+
+    nav ul li a {
+      display: block;
+      padding: 0.42rem 1.5rem;
+      color: var(--subtext);
+      text-decoration: none;
+      font-size: 0.85rem;
+      border-left: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    nav ul li a:hover {
+      color: var(--text);
+      background: var(--bg3);
+    }
+
+    nav ul li a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(137, 180, 250, 0.08);
+      font-weight: 600;
+    }
+
+    nav ul li.sub a {
+      padding-left: 2.5rem;
+      font-size: 0.8rem;
+    }
+
+    nav .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0.75rem 1.5rem;
+    }
+
+    nav .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      padding: 1rem 1.5rem 0.4rem;
+    }
+
+    /* ── 메인 콘텐츠 ── */
+    main {
+      flex: 1;
+      max-width: 860px;
+      padding: 3rem 3.5rem;
+      overflow-x: hidden;
+    }
+
+    /* ── 헤더 ── */
+    .page-header {
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+      color: var(--subtext);
+      font-size: 0.95rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--bg3);
+      color: var(--accent2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      margin-right: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── 섹션 ── */
+    section {
+      margin-bottom: 5rem;
+      scroll-margin-top: 2rem;
+    }
+
+    section .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section .section-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── 타이포그래피 ── */
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin: 2rem 0 0.75rem;
+    }
+
+    h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    p { margin-bottom: 0.85rem; }
+
+    a { color: var(--accent); }
+
+    strong { color: var(--yellow); font-weight: 600; }
+
+    em { color: var(--teal); font-style: normal; font-weight: 500; }
+
+    ul, ol {
+      padding-left: 1.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    li { margin-bottom: 0.3rem; }
+
+    /* ── 콜아웃 박스 ── */
+    .callout {
+      background: var(--bg3);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      font-size: 0.9rem;
+      color: var(--subtext);
+    }
+
+    .callout.green { border-left-color: var(--green); }
+    .callout.red   { border-left-color: var(--red); }
+    .callout.yellow { border-left-color: var(--yellow); }
+
+    .callout strong { color: var(--text); }
+
+    /* ── 코드 ── */
+    pre {
+      background: #11111b !important;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      overflow-x: auto;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.82rem;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    pre .lang-label {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--surface);
+    }
+
+    code:not(pre code) {
+      background: var(--bg3);
+      color: var(--teal);
+      padding: 0.15em 0.45em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    }
+
+    pre code { font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; }
+
+    /* ── 다이어그램 (ASCII flow) ── */
+    .flow {
+      background: #11111b;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      color: var(--subtext);
+      margin: 1rem 0 1.5rem;
+      white-space: pre;
+    }
+
+    .flow .hi  { color: var(--accent); }
+    .flow .ok  { color: var(--green); }
+    .flow .err { color: var(--red); }
+    .flow .dim { color: var(--surface); }
+
+    /* ── 표 ── */
+    .table-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    thead tr {
+      background: var(--bg3);
+    }
+
+    th {
+      padding: 0.65rem 1rem;
+      text-align: left;
+      color: var(--accent2);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid rgba(69, 71, 90, 0.4);
+      color: var(--subtext);
+    }
+
+    tbody tr:nth-child(even) { background: rgba(49, 50, 68, 0.3); }
+    tbody tr:hover { background: rgba(137, 180, 250, 0.05); }
+
+    td strong { color: var(--green); }
+
+    /* ── 비교 카드 ── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .compare-card {
+      background: var(--bg3);
+      border-radius: 10px;
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+    }
+
+    .compare-card .card-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-card.blue .card-title  { color: var(--accent); }
+    .compare-card.green .card-title { color: var(--green); }
+
+    .compare-card ul { padding-left: 1.2rem; }
+    .compare-card li { font-size: 0.85rem; color: var(--subtext); margin-bottom: 0.4rem; }
+
+    /* ── 흐름도 스텝 ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 1rem 0 1.5rem;
+      position: relative;
+    }
+
+    .step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .step-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 2rem;
+    }
+
+    .step-dot {
+      width: 0.65rem;
+      height: 0.65rem;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 0.55rem;
+      flex-shrink: 0;
+    }
+
+    .step-line {
+      width: 1px;
+      flex: 1;
+      min-height: 1.5rem;
+      background: var(--border);
+    }
+
+    .step-body {
+      padding-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    .step-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent2);
+      margin-bottom: 0.2rem;
+    }
+
+    .step-desc {
+      font-size: 0.875rem;
+      color: var(--subtext);
+    }
+
+    /* ── 인용구 ── */
+    blockquote {
+      border-left: 3px solid var(--teal);
+      padding: 0.75rem 1.25rem;
+      margin: 1rem 0;
+      background: rgba(148, 226, 213, 0.05);
+      border-radius: 0 8px 8px 0;
+      color: var(--subtext);
+      font-style: italic;
+    }
+
+    /* ── 섹션 구분선 ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 900px) {
+      nav { display: none; }
+      main { padding: 2rem 1.5rem; }
+    }
+
+    /* ── 스크롤바 ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--surface); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     사이드바 네비게이션
+════════════════════════════════════════ -->
+<nav id="sidebar">
+  <div class="nav-title">Study Hello</div>
+  <ul>
+    <li><a href="#intro">개요</a></li>
+  </ul>
+
+  <div class="section-label">study_hello (GraphQL)</div>
+  <ul>
+    <li><a href="#s1">1 · 학습 가이드</a></li>
+    <li class="sub"><a href="#s1-tech">4가지 기술이란</a></li>
+    <li class="sub"><a href="#s1-flow">동작 흐름</a></li>
+    <li class="sub"><a href="#s1-server">서버 코드</a></li>
+    <li class="sub"><a href="#s1-client">클라이언트 코드</a></li>
+    <li><a href="#s2">2 · 요청 가능한 것 알기</a></li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <div class="section-label">study_hello_Koa (REST)</div>
+  <ul>
+    <li><a href="#s3">3 · 두 프로젝트 비교</a></li>
+    <li><a href="#s4">4 · Koa 코드 이해하기</a></li>
+    <li class="sub"><a href="#s4-server">서버 코드</a></li>
+    <li class="sub"><a href="#s4-api">API 요청</a></li>
+    <li class="sub"><a href="#s4-redux">Redux 상태 관리</a></li>
+    <li class="sub"><a href="#s4-store">Store 설정</a></li>
+    <li class="sub"><a href="#s4-main">main.jsx</a></li>
+    <li class="sub"><a href="#s4-app">App.jsx</a></li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <div class="section-label">REST vs GraphQL</div>
+  <ul>
+    <li><a href="#s5">5 · Python 유저의 선택</a></li>
+    <li><a href="#s6">6 · 복잡한 요구란 무엇인가</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════════════════════════════════
+     메인 콘텐츠
+════════════════════════════════════════ -->
+<main>
+
+  <!-- 페이지 헤더 -->
+  <div class="page-header" id="intro">
+    <h1>Study Hello 학습 가이드</h1>
+    <p style="margin-bottom:0.75rem">두 가지 풀스택 Hello World 프로젝트를 통해 웹 개발의 핵심 개념을 배웁니다.</p>
+    <span class="badge">GraphQL</span>
+    <span class="badge">REST API</span>
+    <span class="badge">React</span>
+    <span class="badge">Redux</span>
+    <span class="badge">Koa</span>
+    <span class="badge">Apollo</span>
+  </div>
+
+
+  <!-- ════════════════════════════
+       섹션 1: study_hello 학습 가이드
+  ════════════════════════════ -->
+  <section id="s1">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>study_hello — React + Apollo + GraphQL 학습 가이드</h2>
+    </div>
+
+    <h3 id="s1-tech">4가지 기술이 각각 뭔지</h3>
+    <p>식당에 비유해서 설명합니다.</p>
+
+    <div class="compare-grid">
+      <div class="compare-card blue">
+        <div class="card-title">GraphQL = 메뉴판 + 주문서 양식</div>
+        <p style="font-size:0.85rem;color:var(--subtext);margin-bottom:0.5rem">클라이언트(손님)와 서버(주방) 사이의 <strong style="color:var(--text)">대화 규칙</strong>이다.</p>
+        <ul>
+          <li>서버가 "나는 이런 데이터를 줄 수 있어"라고 <strong style="color:var(--text)">메뉴판(스키마)</strong>을 정의</li>
+          <li>클라이언트가 "이 데이터 주세요"라고 <strong style="color:var(--text)">주문서(쿼리)</strong>를 보냄</li>
+        </ul>
+      </div>
+      <div class="compare-card green">
+        <div class="card-title">Apollo Server = 주방</div>
+        <p style="font-size:0.85rem;color:var(--subtext)">메뉴판을 가지고 실제로 요리를 만들어주는 곳. 손님이 <code>hello</code>를 주문하면 <code>"Hello from Apollo Server 5!"</code>를 돌려준다.</p>
+      </div>
+      <div class="compare-card blue">
+        <div class="card-title">React = 인테리어 + 테이블 배치</div>
+        <p style="font-size:0.85rem;color:var(--subtext)">손님(사용자)이 보는 <strong style="color:var(--text)">화면을 만드는 도구</strong>. HTML을 직접 쓰는 대신 <strong style="color:var(--text)">컴포넌트</strong>라는 레고 블록으로 조립한다.</p>
+      </div>
+      <div class="compare-card green">
+        <div class="card-title">Apollo Client = 웨이터</div>
+        <p style="font-size:0.85rem;color:var(--subtext)">React 화면과 Apollo Server 사이를 오가며 주문을 전달하고 결과를 가져다주는 역할.</p>
+      </div>
+    </div>
+
+    <h3 id="s1-flow">전체 동작 흐름</h3>
+    <p>사용자가 브라우저에서 <code>http://localhost:5173</code>을 열면 이런 일이 벌어집니다.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-connector"><div class="step-dot"></div><div class="step-line"></div></div>
+        <div class="step-body"><div class="step-label">index.html 로드</div><div class="step-desc">빈 HTML 껍데기. <code>&lt;div id="root"&gt;</code>라는 빈 공간만 있다.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-connector"><div class="step-dot"></div><div class="step-line"></div></div>
+        <div class="step-body"><div class="step-label">main.jsx 실행</div><div class="step-desc">Apollo Client(웨이터) 생성 + React 앱 시작.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-connector"><div class="step-dot"></div><div class="step-line"></div></div>
+        <div class="step-body"><div class="step-label">App.jsx — 주문</div><div class="step-desc">"hello 데이터 주세요" → <code>POST http://localhost:4000/</code> 요청 전송.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-connector"><div class="step-dot"></div><div class="step-line"></div></div>
+        <div class="step-body"><div class="step-label">server/index.js — 응답</div><div class="step-desc">요청을 받아 resolver 실행 → <code>"Hello from Apollo Server 5!"</code> 반환.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-connector"><div class="step-dot"></div></div>
+        <div class="step-body"><div class="step-label">App.jsx — 화면 표시</div><div class="step-desc">받은 데이터를 화면에 렌더링. <strong>"GraphQL response: Hello from Apollo Server 5!"</strong></div></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>핵심</strong>: 서버(포트 4000)와 클라이언트(포트 5173)는 <strong>별도 프로세스</strong>로 실행된다. 서버는 데이터를 제공하고, 클라이언트는 화면을 보여준다.
+    </div>
+
+    <h3 id="s1-server">서버 코드 해설 — server/src/index.js</h3>
+
+    <pre><code class="language-js">import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
+
+// ① 메뉴판 (스키마): "hello를 물어보면 String을 줄 수 있어"
+const typeDefs = `#graphql
+  type Query {
+    hello: String
+  }
+`;
+
+// ② 요리법 (리졸버): 실제로 데이터를 만드는 함수
+const resolvers = {
+  Query: {
+    hello: () => 'Hello from Apollo Server 5!',
+  },
+};
+
+// ③ 서버 생성 + 포트 4000에서 실행
+const server = new ApolloServer({ typeDefs, resolvers });
+const { url } = await startStandaloneServer(server, {
+  listen: { port: 4000 },
+});
+console.log(`Server ready at ${url}`);</code></pre>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>코드</th><th>역할</th><th>비유</th></tr></thead>
+        <tbody>
+          <tr><td><code>typeDefs</code></td><td>요청 가능한 데이터의 타입 정의</td><td>메뉴판</td></tr>
+          <tr><td><code>resolvers</code></td><td>실제 데이터를 반환하는 함수</td><td>요리법</td></tr>
+          <tr><td><code>ApolloServer</code></td><td>서버 인스턴스 생성</td><td>주방 오픈</td></tr>
+          <tr><td><code>startStandaloneServer</code></td><td>HTTP 서버 시작</td><td>영업 시작</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 id="s1-client">클라이언트 코드 해설</h3>
+
+    <h4>main.jsx — 앱의 시작점</h4>
+    <pre><code class="language-jsx">import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+// 웨이터(Apollo Client) 고용
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/',   // 주방 주소
+  cache: new InMemoryCache(),      // 메모장: 같은 요청을 반복하지 않음
+});
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <ApolloProvider client={client}>   {/* 이 안의 모든 컴포넌트가 웨이터를 쓸 수 있다 */}
+    <App />
+  </ApolloProvider>
+);</code></pre>
+
+    <h4>App.jsx — 실제 화면</h4>
+    <pre><code class="language-jsx">import { useQuery, gql } from '@apollo/client';
+
+// 주문서: "hello 데이터를 주세요"
+const HELLO_QUERY = gql`
+  query HelloQuery {
+    hello
+  }
+`;
+
+function App() {
+  // useQuery가 서버에 자동으로 요청을 보낸다
+  const { loading, error, data } = useQuery(HELLO_QUERY);
+  //       ↑ 로딩중?   ↑ 에러?   ↑ 받은 데이터  (Apollo가 자동으로 관리)
+
+  if (loading) return &lt;p&gt;Loading...&lt;/p&gt;;
+  if (error)   return &lt;p&gt;Error: {error.message}&lt;/p&gt;;
+
+  return &lt;p&gt;GraphQL response: &lt;strong&gt;{data.hello}&lt;/strong&gt;&lt;/p&gt;;
+}</code></pre>
+  </section>
+
+
+  <!-- ════════════════════════════
+       섹션 2: 요청 가능한 것 알기
+  ════════════════════════════ -->
+  <section id="s2">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>서버에 어떤 요청이 가능한지 어떻게 알 수 있나?</h2>
+    </div>
+
+    <h3>방법 1: 코드를 직접 보는 법</h3>
+    <p>서버의 <code>typeDefs</code>(스키마 = 메뉴판)를 보면 된다.</p>
+    <pre><code class="language-js">const typeDefs = `#graphql
+  type Query {
+    hello: String   // "hello"만 요청 가능
+  }
+`;</code></pre>
+    <p>지금은 <code>hello: String</code> 하나뿐이니까, 클라이언트가 요청할 수 있는 건 <code>hello</code> 딱 하나뿐이다.</p>
+
+    <h3>방법 2: GraphQL Sandbox (실행 중일 때)</h3>
+    <p>서버를 실행한 뒤 브라우저에서 <code>http://localhost:4000</code>을 열면 <strong>Apollo Sandbox</strong>가 나온다. 이건 GraphQL이 기본 제공하는 <strong>"메뉴판 조회 기능(Introspection)"</strong>을 이용한 것이다.</p>
+    <ul>
+      <li>왼쪽에 사용 가능한 쿼리 목록이 자동으로 표시됨</li>
+      <li>직접 쿼리를 타이핑해서 즉시 테스트 가능</li>
+    </ul>
+
+    <h3>다른 요청을 추가하고 싶다면</h3>
+    <p>스키마와 리졸버에 추가하면 된다. <code>goodbye</code>를 추가하는 예시:</p>
+    <pre><code class="language-js">const typeDefs = `#graphql
+  type Query {
+    hello: String
+    goodbye: String   // 추가
+  }
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => 'Hello from Apollo Server 5!',
+    goodbye: () => 'Goodbye! See you later!',   // 추가
+  },
+};</code></pre>
+
+    <p>그러면 클라이언트에서 이렇게 요청할 수 있다:</p>
+    <pre><code class="language-graphql">{ hello }          # hello만 요청
+{ goodbye }        # goodbye만 요청
+{ hello, goodbye } # 둘 다 한번에 요청 ← 이게 GraphQL의 장점!</code></pre>
+
+    <div class="callout green">
+      <strong>GraphQL의 큰 장점</strong>: 서버가 "나는 이런 데이터를 줄 수 있어"라고 스키마로 명확히 선언하기 때문에,
+      클라이언트 개발자가 <strong>문서 없이도</strong> 무엇을 요청할 수 있는지 바로 알 수 있다.
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════
+       섹션 3: 두 프로젝트 비교
+  ════════════════════════════ -->
+  <section id="s3">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>study_hello vs study_hello_Koa 비교</h2>
+    </div>
+
+    <div class="callout">
+      두 프로젝트는 모두 "서버에서 Hello 메시지를 받아 화면에 보여주는" 같은 기능을 한다.
+      하지만 <strong>서버-클라이언트가 대화하는 방식</strong>이 완전히 다르다.
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>study_hello</th><th>study_hello_Koa</th></tr></thead>
+        <tbody>
+          <tr><td>서버</td><td>Apollo Server (GraphQL)</td><td>Koa (REST API)</td></tr>
+          <tr><td>통신 방식</td><td>GraphQL 쿼리</td><td>axios HTTP 요청</td></tr>
+          <tr><td>엔드포인트</td><td><code>/</code> 하나만</td><td><code>/api/hello</code> 처럼 기능마다</td></tr>
+          <tr><td>상태 관리</td><td>없음 (Apollo가 자동 처리)</td><td>Redux + redux-pender</td></tr>
+          <tr><td>포트</td><td>4000</td><td>4001</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>통신 방식의 차이: REST vs GraphQL</h3>
+    <div class="compare-grid">
+      <div class="compare-card blue">
+        <div class="card-title">GraphQL 요청</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem;overflow-x:auto"><code class="language-http">POST http://localhost:4000/
+
+{
+  query HelloQuery {
+    hello
+  }
+}</code></pre>
+        <ul style="margin-top:0.75rem">
+          <li>엔드포인트가 <strong style="color:var(--text)">딱 하나</strong></li>
+          <li>요청 본문에 쿼리 언어로 명시</li>
+        </ul>
+      </div>
+      <div class="compare-card green">
+        <div class="card-title">REST 요청</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem;overflow-x:auto"><code class="language-http">GET http://localhost:4001/api/hello</code></pre>
+        <ul style="margin-top:0.75rem">
+          <li>기능마다 <strong style="color:var(--text)">URL이 다름</strong></li>
+          <li>요청 방식(GET/POST 등)으로 동작 구분</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>클라이언트 코드의 차이</h3>
+    <h4>study_hello — Apollo가 자동으로 관리</h4>
+    <pre><code class="language-jsx">// 페이지가 처음 렌더링될 때 자동으로 서버에 요청
+const { loading, error, data } = useQuery(HELLO_QUERY);
+// 별도의 상태 관리 코드 없이 useQuery 하나로 끝</code></pre>
+
+    <h4>study_hello_Koa — 직접 관리</h4>
+    <pre><code class="language-jsx">// 버튼을 눌러야 요청이 시작된다 (자동 아님)
+const { message, loading, error } = useSelector((state) => state.hello);
+
+const handleClick = () => {
+  dispatch(fetchHelloAction());  // 수동으로 dispatch
+};</code></pre>
+
+    <h3>redux-pender가 하는 일</h3>
+    <p>axios 요청(비동기 작업)을 자동으로 3단계로 나눠준다.</p>
+    <div class="flow"><span class="hi">버튼 클릭</span>
+  │
+  ▼
+<span class="hi">dispatch(fetchHelloAction())</span>  <span class="dim">← payload = Promise</span>
+  │
+  ▼
+<span class="hi">redux-pender 미들웨어</span>가 Promise를 감지
+  │
+  ├─[요청 시작]──► <span class="ok">FETCH_HELLO_PENDING</span>  → loading: true
+  │
+  ├─[성공]────────► <span class="ok">FETCH_HELLO_SUCCESS</span> → loading: false, message: "Hello from Koa!"
+  │
+  └─[실패]────────► <span class="err">FETCH_HELLO_FAILURE</span> → loading: false, error: ...</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>상황</th><th>추천 방식</th></tr></thead>
+        <tbody>
+          <tr><td>단순한 데이터 조회</td><td>Apollo <code>useQuery</code></td></tr>
+          <tr><td>상태 변화가 복잡하고 여러 컴포넌트가 공유</td><td><strong>Redux</strong></td></tr>
+          <tr><td>단순한 CRUD 작업</td><td><strong>REST API</strong></td></tr>
+          <tr><td>여러 종류의 데이터를 한 번에 요청</td><td><strong>GraphQL</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════
+       섹션 4: Koa 코드 이해하기
+  ════════════════════════════ -->
+  <section id="s4">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>study_hello_Koa 코드 한 줄씩 이해하기</h2>
+    </div>
+
+    <p>파일 구조부터 확인하자.</p>
+    <pre><code class="language-bash">study_hello_Koa/
+├── server/
+│   └── src/index.js        ← 서버 코드 (Koa)
+└── client/
+    ├── vite.config.js       ← 개발 도구 설정
+    └── src/
+        ├── main.jsx         ← 앱의 진입점
+        ├── App.jsx          ← 화면에 보이는 컴포넌트
+        ├── api/
+        │   └── helloApi.js  ← 서버에 요청 보내는 코드
+        └── store/
+            ├── index.js     ← Redux 저장소 만들기
+            └── modules/
+                └── hello.js ← 상태 관리 로직</code></pre>
+
+    <h3 id="s4-server">① server/src/index.js — Koa 서버</h3>
+    <pre><code class="language-js">import Koa from 'koa';           // Python의 Flask/FastAPI 같은 것
+import Router from 'koa-router'; // URL 경로를 등록하는 도구
+import bodyParser from 'koa-bodyparser'; // POST 요청 본문을 읽어주는 도구
+import cors from '@koa/cors';    // 다른 포트 요청을 허용
+
+const app = new Koa();    // 서버 인스턴스 (FastAPI의 app = FastAPI()와 같다)
+const router = new Router(); // URL 경로 묶음
+
+app.use(cors());          // 모든 요청에서 CORS 허용
+app.use(bodyParser());    // 모든 요청에서 본문 파싱
+
+router.get('/api/hello', (ctx) => {
+  ctx.body = { message: 'Hello from Koa!' }; // ctx.body = 응답 데이터
+});
+
+app.use(router.routes());       // router에 등록한 경로를 app에 붙임
+app.use(router.allowedMethods()); // 허용 안 된 메서드엔 405 자동 반환
+
+app.listen(4001, () => {
+  console.log('Koa server running on http://localhost:4001');
+});</code></pre>
+
+    <div class="callout yellow">
+      <strong>CORS가 필요한 이유</strong>: 브라우저는 기본적으로 <strong>다른 포트로 요청을 막는다</strong>.
+      클라이언트(5173)가 서버(4001)로 요청할 때 포트가 다르므로, 서버에서 <code>cors()</code>로 허용해야 한다.
+    </div>
+
+    <h3 id="s4-api">② api/helloApi.js — 서버에 요청 보내기</h3>
+    <pre><code class="language-js">import axios from 'axios'; // Python의 requests 라이브러리와 같다
+
+const BASE_URL = 'http://localhost:4001';
+
+// axios.get()은 Promise를 반환한다
+// Promise = "아직 결과가 없지만 곧 올 것"을 나타내는 객체
+export const fetchHello = () => axios.get(`${BASE_URL}/api/hello`);</code></pre>
+
+    <div class="compare-grid">
+      <div class="compare-card blue">
+        <div class="card-title">JavaScript (axios)</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem"><code class="language-js">const fetchHello = () =>
+  axios.get('http://localhost:4001/api/hello');</code></pre>
+      </div>
+      <div class="compare-card green">
+        <div class="card-title">Python (requests)</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem"><code class="language-python">def fetch_hello():
+    return requests.get(
+        'http://localhost:4001/api/hello'
+    )</code></pre>
+      </div>
+    </div>
+
+    <h3 id="s4-redux">③ store/modules/hello.js — Redux 상태 관리 로직</h3>
+
+    <h4>Redux란?</h4>
+    <p>앱 전체의 데이터를 한 곳에서 관리하는 도구다.</p>
+    <div class="flow"><span class="dim">Redux가 없으면:</span>
+  컴포넌트A → 컴포넌트B → 컴포넌트C 로 데이터를 일일이 전달해야 함
+
+<span class="dim">Redux가 있으면:</span>
+  모든 컴포넌트 → <span class="ok">중앙 저장소(store)</span>에서 직접 데이터를 꺼냄</div>
+
+    <pre><code class="language-js">import { createAction, handleActions } from 'redux-actions';
+import { pender } from 'redux-pender';
+import { fetchHello } from '../../api/helloApi';
+
+// Action 타입 (문자열 상수)
+const FETCH_HELLO = 'hello/FETCH_HELLO';
+
+// Action creator: 실행하면 { type: FETCH_HELLO, payload: Promise } 생성
+export const fetchHelloAction = createAction(FETCH_HELLO, () => fetchHello());
+
+// 초기 상태
+const initialState = {
+  message: null,   // 서버에서 받은 메시지 (처음엔 없음)
+  loading: false,  // 요청 중인가? (처음엔 아님)
+  error: null,     // 에러가 있는가? (처음엔 없음)
+};
+
+// Reducer: "어떤 액션이 오면 상태를 어떻게 바꿀지" 정의
+export default handleActions(
+  {
+    ...pender({          // pender가 PENDING / SUCCESS / FAILURE 세 가지를 자동 생성
+      type: FETCH_HELLO,
+      onPending: (state) => ({
+        ...state,        // 기존 상태 복사 (Python의 {**state}와 같다)
+        loading: true,
+        error: null,
+      }),
+      onSuccess: (state, action) => ({
+        ...state,
+        loading: false,
+        message: action.payload.data.message, // axios 응답 구조: payload.data.message
+      }),
+      onFailure: (state, action) => ({
+        ...state,
+        loading: false,
+        error: action.payload,
+      }),
+    }),
+  },
+  initialState
+);</code></pre>
+
+    <div class="callout">
+      <strong><code>...state</code>가 뭔가?</strong> 스프레드 연산자. "기존 상태를 그대로 복사하고, 그 다음에 오는 것만 바꿔라"는 뜻.
+      Python의 <code>{**state, "loading": True}</code>와 같다.
+    </div>
+
+    <h4>axios 응답 구조</h4>
+    <pre><code class="language-js">// action.payload.data.message를 쓰는 이유:
+// axios가 응답을 이렇게 감싸기 때문이다
+action = {
+  payload: {              // axios 응답 객체
+    data: {               // 서버가 실제로 보낸 JSON
+      message: "Hello from Koa!"   // 우리가 원하는 값
+    },
+    status: 200,
+    // ...
+  }
+}</code></pre>
+
+    <h3 id="s4-store">④ store/index.js — Redux 저장소 만들기</h3>
+    <pre><code class="language-js">import { createStore, combineReducers, applyMiddleware } from 'redux';
+import penderMiddleware from 'redux-pender';
+import hello from './modules/hello';
+
+// 여러 모듈의 reducer를 하나로 합침
+// 결과: { hello: { message, loading, error } }
+const rootReducer = combineReducers({ hello });
+
+// 저장소 생성 + 미들웨어 등록
+const store = createStore(rootReducer, applyMiddleware(penderMiddleware()));
+//                                      ↑ dispatch → reducer 사이에서 Promise를 감지
+
+export default store;</code></pre>
+
+    <div class="callout">
+      <strong>미들웨어란?</strong> 액션이 dispatch되고 reducer에 도달하기 전에 <strong>중간에서 처리</strong>하는 것.
+      <code>penderMiddleware</code>가 없으면 Redux는 Promise를 그냥 저장해버린다.
+      미들웨어가 있어야 비동기 요청의 3단계(PENDING/SUCCESS/FAILURE)로 나눠준다.
+    </div>
+
+    <h3 id="s4-main">⑤ main.jsx — 앱의 진입점</h3>
+    <pre><code class="language-jsx">import { Provider } from 'react-redux';
+import store from './store/index';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;React.StrictMode&gt;
+    &lt;Provider store={store}&gt;   {/* Redux store를 앱 전체에 공급 */}
+      &lt;App /&gt;
+    &lt;/Provider&gt;
+  &lt;/React.StrictMode&gt;
+);</code></pre>
+    <p><code>&lt;Provider store={store}&gt;</code>: 이 안에 있는 모든 컴포넌트는 store에 접근할 수 있다. 전역 변수처럼 어디서든 접근 가능하지만 훨씬 안전하게 관리된다.</p>
+
+    <h3 id="s4-app">⑥ App.jsx — 화면에 보이는 컴포넌트</h3>
+    <pre><code class="language-jsx">import { useDispatch, useSelector } from 'react-redux';
+import { fetchHelloAction } from './store/modules/hello';
+
+function App() {
+  const dispatch = useDispatch();
+  // store에서 hello 상태를 꺼낸다
+  // state.hello인 이유: combineReducers({ hello })로 만들었기 때문
+  const { message, loading, error } = useSelector((state) => state.hello);
+
+  const handleClick = () => {
+    dispatch(fetchHelloAction()); // 버튼 클릭 → 액션 dispatch
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Study Hello Koa&lt;/h1&gt;
+
+      {/* disabled={loading}: 요청 중엔 버튼 비활성화 (중복 요청 방지) */}
+      &lt;button onClick={handleClick} disabled={loading}&gt;
+        {loading ? 'Loading...' : 'Fetch Hello'}
+      &lt;/button&gt;
+
+      {/* message가 있을 때만 보여준다 (Python의 if message: 와 같다) */}
+      {message &amp;&amp; &lt;p&gt;Response: &lt;strong&gt;{message}&lt;/strong&gt;&lt;/p&gt;}
+      {error   &amp;&amp; &lt;p style={{ color: 'red' }}&gt;Error: {String(error)}&lt;/p&gt;}
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+    <h3>전체 흐름 한눈에 보기</h3>
+    <div class="flow"><span class="hi">브라우저 http://localhost:5173</span>
+  │  페이지 로드 → 버튼 "Fetch Hello" 표시
+  │
+  │  버튼 클릭
+  ▼
+<span class="hi">dispatch(fetchHelloAction())</span>
+  │
+  ▼
+<span class="hi">penderMiddleware</span>  payload가 Promise임을 감지
+  │
+  ▼  FETCH_HELLO_PENDING dispatch
+<span class="ok">loading: true</span> → 버튼 "Loading..." (비활성화)
+  │
+  │  axios → GET http://localhost:4001/api/hello
+  ▼
+<span class="hi">Koa 서버</span>  { message: "Hello from Koa!" } 응답
+  │
+  ▼  FETCH_HELLO_SUCCESS dispatch
+<span class="ok">loading: false, message: "Hello from Koa!"</span>
+  │
+  ▼
+<span class="hi">App.jsx 리렌더링</span>  "Response: Hello from Koa!" 표시</div>
+  </section>
+
+
+  <!-- ════════════════════════════
+       섹션 5: Python 유저의 선택
+  ════════════════════════════ -->
+  <section id="s5">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>Python 유저 입장에서 REST vs GraphQL 선택 가이드</h2>
+    </div>
+
+    <div class="callout green">
+      <strong>결론부터:</strong> <strong>REST API가 보편적으로 합리적인 선택이다.</strong>
+      단, "항상 REST"는 아니다.
+    </div>
+
+    <h3>왜 Python 유저에게 REST가 더 자연스러운가</h3>
+
+    <h4>① 생태계가 REST 중심으로 성숙해 있다</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>프레임워크</th><th>REST 지원</th><th>GraphQL 지원</th></tr></thead>
+        <tbody>
+          <tr><td>FastAPI</td><td><strong>네이티브 (핵심 기능)</strong></td><td>별도 라이브러리 필요 (strawberry 등)</td></tr>
+          <tr><td>Django</td><td><strong>DRF로 성숙</strong></td><td>graphene-django로 추가 가능</td></tr>
+          <tr><td>Flask</td><td>flask-restful / 직접 구현</td><td>flask-graphql로 추가 가능</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-card green">
+        <div class="card-title">FastAPI + REST (기본 방식)</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem"><code class="language-python">@app.get("/api/hello")
+def get_hello():
+    return {"message": "Hello!"}
+# 튜토리얼 1페이지</code></pre>
+      </div>
+      <div class="compare-card blue">
+        <div class="card-title">FastAPI + GraphQL (별도 설치)</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem"><code class="language-python">import strawberry
+
+@strawberry.type
+class Query:
+    @strawberry.field
+    def hello(self) -> str:
+        return "Hello!"
+# 추가 개념 필요</code></pre>
+      </div>
+    </div>
+
+    <h4>② ML / 데이터 과학 생태계와 자연스럽게 연결된다</h4>
+    <div class="flow">pandas / sklearn / pytorch로 모델 학습
+        │
+        ▼
+FastAPI로 모델을 REST API로 감쌈
+        │
+        ▼
+<span class="ok">POST /predict  →  { "result": 0.87 }</span>
+        │
+        ▼
+프론트엔드 / 앱 / 다른 서비스가 호출</div>
+    <p>Hugging Face, OpenAI, Anthropic 등 대부분의 AI API가 REST 방식이다.</p>
+
+    <h4>③ 디버깅과 테스트가 훨씬 쉽다</h4>
+    <div class="compare-grid">
+      <div class="compare-card green">
+        <div class="card-title">REST — curl 한 줄</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem"><code class="language-bash">curl http://localhost:8000/api/users/1</code></pre>
+      </div>
+      <div class="compare-card blue">
+        <div class="card-title">GraphQL — JSON 본문 필요</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem"><code class="language-bash">curl -X POST http://localhost:8000/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query": "{ user(id: 1) { name email } }"}'</code></pre>
+      </div>
+    </div>
+
+    <h3>그렇다면 GraphQL은 언제 선택하는가</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>상황</th><th>선택</th></tr></thead>
+        <tbody>
+          <tr><td>FastAPI / Django로 백엔드 처음 만든다</td><td><strong>REST</strong></td></tr>
+          <tr><td>ML 모델을 API로 배포한다</td><td><strong>REST</strong></td></tr>
+          <tr><td>외부 서비스 / 앱이 내 API를 쓴다</td><td><strong>REST</strong></td></tr>
+          <tr><td>모바일 + 웹이 같은 서버를 쓰고 데이터 형태가 다르다</td><td><strong>GraphQL 검토</strong></td></tr>
+          <tr><td>프론트엔드 팀이 Apollo를 쓴다</td><td><strong>GraphQL</strong></td></tr>
+          <tr><td>연관 데이터를 한 번에 요청해야 하는 경우가 많다</td><td><strong>GraphQL 검토</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <blockquote>
+      Python으로 서버를 처음 만든다면 <strong>REST(FastAPI)로 시작</strong>하고,
+      프론트엔드의 데이터 요구가 복잡해지는 시점에 GraphQL을 검토하면 된다.
+      GraphQL은 "더 좋은" 방식이 아니라 <strong>특정 문제를 해결하기 위한</strong> 방식이다.
+    </blockquote>
+  </section>
+
+
+  <!-- ════════════════════════════
+       섹션 6: 복잡한 요구란 무엇인가
+  ════════════════════════════ -->
+  <section id="s6">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2>"프론트엔드 데이터 요구가 복잡하다"는 게 무슨 뜻인가?</h2>
+    </div>
+
+    <div class="callout">
+      대용량 데이터와는 관계없다.
+      <strong>같은 데이터를 화면마다 다른 형태로 요청한다</strong>는 뜻이다.
+    </div>
+
+    <h3>구체적인 예시: 인스타그램 같은 SNS</h3>
+    <p>"게시글(Post)" 데이터가 서버에 이렇게 저장되어 있다고 하자.</p>
+    <pre><code class="language-text">Post {
+  id
+  image_url
+  content         (본문, 최대 2000자)
+  created_at
+  like_count
+  author {
+    id, username, profile_image
+    bio             (자기소개, 최대 500자)
+    follower_count
+  }
+  comments [
+    { id, content, author { username } }
+    ... 수백 개
+  ]
+  tags [ "여행", "맛집", ... ]
+}</code></pre>
+
+    <h4>이 데이터가 필요한 화면이 3개 있다</h4>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>화면</th><th>필요한 필드</th><th>불필요한 것</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--text)">피드 목록</strong> (스크롤 화면)</td>
+            <td><code>image_url</code>, <code>like_count</code>, <code>author.username</code>, 본문 30자</td>
+            <td>댓글 전체, 본문 나머지, bio…</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">게시글 상세</strong></td>
+            <td>전부 + <code>comments</code> 전체 + <code>tags</code></td>
+            <td>없음</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">알림 목록</strong></td>
+            <td><code>image_url</code>, <code>author.username</code> 딱 2개</td>
+            <td>나머지 <strong>전부</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>REST라면 어떤 문제가 생기나</h3>
+
+    <h4>방법 A: 화면마다 엔드포인트를 만든다</h4>
+    <pre><code class="language-text">GET /posts/feed               → 피드용 데이터
+GET /posts/{id}               → 상세용 데이터
+GET /posts/notification-preview → 알림용 데이터</code></pre>
+    <p>화면이 10개면 엔드포인트가 10개. 화면 디자인이 바뀔 때마다 백엔드도 수정해야 한다.</p>
+    <div class="callout red">
+      <strong>문제:</strong> 프론트: "피드에 댓글 수도 보여주고 싶어요" → 백엔드 수정 → 프론트: "역시 필요 없을 것 같아요" → 백엔드 또 수정…
+    </div>
+
+    <h4>방법 B: 항상 전체 데이터를 준다</h4>
+    <p>알림 화면은 2개 필드만 필요한데, 댓글 수백 개를 받아서 99%를 버린다.</p>
+    <div class="callout red">
+      <strong>Over-fetching 문제:</strong> 알림이 1000개면 → 불필요한 댓글 데이터를 <strong>347,000개</strong> 받아서 버리는 셈이다.
+    </div>
+
+    <h3>GraphQL이라면</h3>
+    <p>엔드포인트는 하나(<code>/graphql</code>). 클라이언트가 필요한 필드만 골라서 요청한다.</p>
+
+    <div class="compare-grid">
+      <div class="compare-card blue">
+        <div class="card-title">피드에서 요청</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem"><code class="language-graphql">query {
+  posts {
+    image_url
+    like_count
+    author { username }
+    content
+  }
+}</code></pre>
+      </div>
+      <div class="compare-card green">
+        <div class="card-title">알림에서 요청</div>
+        <pre style="margin:0;background:#11111b;border-radius:6px;padding:0.75rem;font-size:0.78rem"><code class="language-graphql">query {
+  post(id: 1) {
+    image_url
+    author { username }
+  }
+  # 댓글 347개 → 아예 요청 안 함</code></pre>
+      </div>
+    </div>
+
+    <h3>정리</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>오해</th><th>실제 의미</th></tr></thead>
+        <tbody>
+          <tr><td>데이터 양이 많다 (대용량)</td><td style="color:var(--red)">❌ 아니다</td></tr>
+          <tr><td><strong>화면마다 같은 데이터를 다른 형태로 필요로 한다</strong></td><td style="color:var(--green)">✅ 이게 맞다</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout green">
+      <strong>혼자 만드는 토이 프로젝트라면?</strong> 이 문제가 잘 안 생긴다. 화면이 몇 개 없고 프론트·백엔드를 같은 사람이 만드니까 그냥 맞춰주면 된다.
+      GraphQL이 빛나는 건 <strong>프론트 팀 / 백엔드 팀이 분리된 큰 서비스</strong>에서다.
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════
+     스크립트
+════════════════════════════════════════ -->
+<script>
+  // 코드 하이라이팅
+  document.addEventListener('DOMContentLoaded', () => {
+    hljs.highlightAll();
+  });
+
+  // 사이드바 현재 섹션 하이라이트
+  const sections = document.querySelectorAll('section[id], div[id="intro"]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    },
+    { rootMargin: '-10% 0px -80% 0px' }
+  );
+
+  sections.forEach((s) => observer.observe(s));
+
+  // h3에 id 자동 매핑
+  document.querySelectorAll('h3[id]').forEach((el) => {
+    const id = el.id;
+    navLinks.forEach((link) => {
+      if (link.getAttribute('href') === '#' + id) {
+        link.addEventListener('click', () => {
+          setTimeout(() => {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }, 100);
+        });
+      }
+    });
+  });
+</script>
+</body>
+</html>
